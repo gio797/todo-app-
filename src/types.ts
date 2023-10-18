@@ -3,4 +3,5 @@ export interface TaskInterface {
     done: boolean;
     onToggle?: (index: number) => void
     index?: number
+    onDelete?: (index: number) => void
 }

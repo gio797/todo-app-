@@ -7,7 +7,7 @@ function App() {
   const [tasks, setTasks] = useState<TaskInterface[]>(
     JSON.parse(localStorage.getItem("tasks") || "[]")
   );
-
+  // console.log(tasks);
   useEffect(() => {
     localStorage.setItem("tasks", JSON.stringify(tasks));
   }, [tasks]);
@@ -27,6 +27,12 @@ function App() {
         }
         return task; // For other tasks, return them as they are
       });
+    });
+  }
+
+  function handleDelete(index: number) {
+    setTasks((prevTasks) => {
+      return prevTasks.filter((_, i) => i !== index);
     });
   }
 
@@ -61,6 +67,7 @@ function App() {
           key={task.name + i}
           onToggle={() => handleDone(i)}
           index={i}
+          onDelete={() => handleDelete(i)}
         />
       ))}
     </div>
