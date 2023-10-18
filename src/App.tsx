@@ -7,7 +7,6 @@ function App() {
   const [tasks, setTasks] = useState<TaskInterface[]>(
     JSON.parse(localStorage.getItem("tasks") || "[]")
   );
-  console.log(tasks);
 
   useEffect(() => {
     localStorage.setItem("tasks", JSON.stringify(tasks));
@@ -31,8 +30,29 @@ function App() {
     });
   }
 
+  const numberComplete = tasks.filter((task) => task.done).length;
+  const numberTotal = tasks.length;
+
+  function getMessage() {
+    const percentage = (numberComplete / numberTotal) * 100;
+
+    if (percentage === 0) {
+      return "Try to do at least one task! 🙏🏻";
+    } else if (percentage < 99) {
+      return "Keep it going! 💪🏼";
+    } else if (percentage === 100) {
+      return "Nice Job! 🤘🏼";
+    }
+  }
+
   return (
     <div className="app">
+      <div className="task-amount">
+        <h1>
+          {numberComplete}/{numberTotal} Complete
+        </h1>
+        <h2>{getMessage()}</h2>
+      </div>
       <TaskForm onAdd={addTask} />
       {tasks.map((task, i) => (
         <Task
