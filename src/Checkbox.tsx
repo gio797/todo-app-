@@ -1,14 +1,11 @@
-import { useState } from "react";
-
 type Props = {
-  defaultChecked: boolean;
+  checked: boolean;
+  onClick: () => void;
 };
 
-function Checkbox({ defaultChecked }: Props) {
-  const [checked, setChecked] = useState(defaultChecked);
-
+function Checkbox({ checked, onClick }: Props) {
   return (
-    <div>
+    <div onClick={onClick}>
       {checked ? (
         <div className="checkbox checked">
           <svg

@@ -1,10 +1,10 @@
 import Checkbox from "./Checkbox";
 import { TaskInterface } from "./types";
 
-function Task({ name, done }: TaskInterface) {
+function Task({ name, done, onToggle, index }: TaskInterface) {
   return (
-    <div className="task">
-      <Checkbox defaultChecked={done} />
+    <div className={`task ${done && "done"}`}>
+      <Checkbox checked={done} onClick={() => onToggle!(index!)} />
       <p>{name}</p>
     </div>
   );

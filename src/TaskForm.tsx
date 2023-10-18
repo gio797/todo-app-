@@ -24,6 +24,7 @@ function TaskForm({ onAdd }: Props) {
         type="text"
         value={taskName}
         placeholder="New Task"
+        name="taskName"
         onChange={(e) => handleChange(e)}
       />
     </form>
