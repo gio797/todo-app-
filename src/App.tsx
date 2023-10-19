@@ -7,7 +7,7 @@ function App() {
   const [tasks, setTasks] = useState<TaskInterface[]>(
     JSON.parse(localStorage.getItem("tasks") || "[]")
   );
-  // console.log(tasks);
+
   useEffect(() => {
     localStorage.setItem("tasks", JSON.stringify(tasks));
   }, [tasks]);
@@ -20,12 +20,11 @@ function App() {
 
   function handleDone(index: number) {
     setTasks((prevTasks) => {
-      // Create a new array with the updated 'done' property for the task at the specified index
       return prevTasks.map((task, i) => {
         if (i === index) {
           return { ...task, done: !task.done };
         }
-        return task; // For other tasks, return them as they are
+        return task;
       });
     });
   }
